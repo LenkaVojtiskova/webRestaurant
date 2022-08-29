@@ -1,1 +1,222 @@
-/*# sourceMappingURL=style.css.map */
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+header {
+  z-index: 2;
+  overflow: visible;
+  background-color: #151618;
+  color: #c8a27c;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 15vh;
+}
+header .header-container {
+  display: flex;
+  height: 100%;
+}
+header .restaurant-logo {
+  flex-grow: 2;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 15px;
+}
+header .restaurant-logo h1 {
+  cursor: pointer;
+  font-family: "Merienda", cursive;
+  font-size: 40px;
+  padding-left: 35px;
+}
+header .header-main {
+  display: block;
+  margin: auto auto;
+  flex-grow: 2;
+}
+header .header-main #navbar {
+  font-family: "Merienda", cursive;
+  font-size: 20px;
+  display: flex;
+}
+header .header-main #navbar .menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .header-main #navbar .menu img {
+  padding-left: 5px;
+  width: 12px;
+}
+header .header-main #navbar li {
+  padding: 10px;
+}
+header .header-main #navbar .hoverLight:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 50ms ease-in-out;
+  text-shadow: 2px -2px #594468;
+}
+header .header-main #navbar .hoverLight:hover .bottomBorder:after {
+  margin-top: -5px;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  border-bottom: 3px solid #a68fb6;
+  transform: scaleX(0);
+  transition: transform 350ms ease-in-out;
+}
+header .header-main #navbar .hoverLight:hover .bottomBorder:hover:after {
+  transform: scale(1);
+  transform-origin: 0% 50%;
+}
+header .header-main #navbar .hoverLight:hover a {
+  position: relative;
+  color: white;
+}
+header .header-buttons {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+header .header-buttons #dark-mode-toggle {
+  padding: 15px;
+}
+header .header-buttons #dark-mode-toggle #dark-mode-button {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border-radius: 15%;
+  background-color: black;
+  border: 1px solid #c8a27c;
+}
+header .header-buttons #dark-mode-toggle #dark-mode-button:hover {
+  border-color: #a68fb6;
+  transform: scale(1.05);
+}
+header .header-buttons #languages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 25px;
+  height: 100%;
+}
+header .header-buttons #languages button {
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #c8a27c;
+  height: 30px;
+  width: 30px;
+  border-radius: 15%;
+}
+header .header-buttons #languages button:hover {
+  border-color: #a68fb6;
+  transform: scale(1.05);
+}
+
+main {
+  position: relative;
+  margin-top: 15vh;
+  background-color: tertiary-color;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+main p {
+  padding: 8px 0px;
+}
+main .main-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  padding: 0px 25px;
+  padding-top: 25px;
+}
+main aside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: center;
+  color: #151618;
+}
+main .main-content {
+  padding: 0px 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #151618;
+  color: #c8a27c;
+  position: absolute;
+  height: 10vh;
+  padding: 15px;
+  left: 0;
+  right: 0;
+}
+
+::-webkit-scrollbar {
+  background-color: #151618;
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8a27c;
+  border-radius: 15px;
+}
+
+a:-webkit-any-link {
+  color: #c8a27c;
+  cursor: pointer;
+}
+
+.displayed {
+  display: none;
+  height: 100%;
+  padding: 0px;
+  overflow: visible;
+  height: "content";
+  background-color: rgba(102, 78, 120, 0.6);
+  border-radius: 15%;
+  padding: 8px;
+  text-shadow: 2px -2px black;
+}
+.displayed li:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 50ms ease-in-out;
+  color: white;
+  transform: scale(1.05);
+}
+
+.hoverMenu:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 50ms ease-in-out;
+  text-shadow: 2px -2px #594468;
+  color: white;
+  transform: scale(1.05);
+}
+
+.menuLi:hover .displayed {
+  display: flex;
+  height: 100%;
+  padding: 0px;
+  position: absolute;
+  margin-left: -15px;
+}/*# sourceMappingURL=style.css.map */

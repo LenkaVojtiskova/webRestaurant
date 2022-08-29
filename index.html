@@ -5,58 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./CSS/style.css" />
   </head>
   <body>
     <header>
       <div class="header-container">
-        <div id="restaurant-logo">
+        <div class="restaurant-logo">
           <img
             src="./imgs/transparent-logo.jpg"
             width="90px"
             height="90px"
             alt="restaurant logo image"
           />
+          <h1><a href=""> Restaurace Amalka</a></h1>
         </div>
 
         <div class="header-main">
-          <nav id="navbar">
-            <ul>
-              <a href="#"> <li id="about">O nás</li> </a>
-              <li id="menu">
-                <a href="#">Menu</a>
-
-                <ul id="menu-plus" class="default-display-none">
-                  <a href="#"> <li id="menu-plus-easy">Jednoduché menu</li></a>
-                  <a href="#"> <li id="menu-plus-detail">Detailní menu</li></a>
-                </ul>
-
-                <a href="#"><li id="selected-menu">Zvolené menu</li></a>
-                <a href="#"><li id="contacts">Kontakty</li></a>
+          <nav>
+            <ul id="navbar">
+              <li class="hoverLight" id="about">
+                <a class="bottomBorder" href="#Onas"> O nás</a>
+              </li>
+              <li class="menuLi">
+                <a class="menu" class="hoverLight" class="bottomBorder" href="#"
+                  >Menu
+                  <img
+                    class="off-dropdown-menu-icon"
+                    src="./imgs/down.png"
+                    alt=""
+                  />
+                  <div class="displayed">
+                    <ul class="not-displayed">
+                      <li class="menu-plus-easy">
+                        <a href="#"> Jednoduché menu</a>
+                      </li>
+                      <li class="menu-plus-easy">
+                        <a href="#">Detailní menu</a>
+                      </li>
+                    </ul>
+                  </div>
+                </a>
+              </li>
+              <li id="selected-menu" class="hoverLight">
+                <a class="bottomBorder" href="#">Zvolené menu</a>
+              </li>
+              <li id="contacts" class="hoverLight">
+                <a class="bottomBorder" href="#">Kontakty</a>
               </li>
             </ul>
           </nav>
         </div>
+        <div class="header-buttons">
+          <div id="dark-mode-toggle">
+            <button id="dark-mode-button"></button>
+          </div>
 
-        <div id="dark-mode-toggle">
-          <button id="dark-mode-button"></button>
-        </div>
-
-        <div id="languages">
-          <button id="czLanguage" class="langBtn">CZ</button>
-          <button id="enLanguage" class="langBtn">EN</button>
+          <div id="languages">
+            <button id="czLanguage" class="langBtn">CZ</button>
+            <button id="enLanguage" class="langBtn">EN</button>
+          </div>
         </div>
       </div>
     </header>
 
     <main>
       <div class="main-container">
-        <aside id="aside-menu"></aside>
+        <aside id="aside-menu">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea ab
+            architecto ut adipisci nesciunt aliquam fuga rerum, ex laboriosam
+            animi?
+          </p>
+        </aside>
 
         <div class="main-content">
           <div>
             <div class="main-up">
               <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Aperiam vitae labore porro architecto veniam sequi dignissimos
+                repellat laboriosam voluptatem esse.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Aperiam vitae labore porro architecto veniam sequi dignissimos
+                repellat laboriosam voluptatem esse.
+              </p>
+              <img
+                src="https://cdn.pixabay.com/photo/2022/08/17/02/23/edison-bulb-7391388_960_720.jpg"
+                width="650px"
+                alt=""
+              />
+              <p id="Onas">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aperiam vitae labore porro architecto veniam sequi dignissimos
                 repellat laboriosam voluptatem esse.
@@ -76,8 +122,6 @@
             </div>
           </div>
         </div>
-
-        <div class="main-right"></div>
       </div>
     </main>
 

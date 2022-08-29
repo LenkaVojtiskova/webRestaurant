@@ -1,0 +1,251 @@
+$primary-color: #151618;
+
+$secondary-color: #974928;
+
+$tertiary-color: #c8a27c;
+
+$quartery-color: #c0c0c5;
+
+$pentiary-color: #a68fb6;
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+header {
+  z-index: 2;
+  overflow: visible;
+  background-color: $primary-color;
+  color: $tertiary-color;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 15vh;
+
+  .header-container {
+    display: flex;
+    height: 100%;
+  }
+  .restaurant-logo {
+    flex-grow: 2;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 15px;
+    h1 {
+      cursor: pointer;
+      font-family: "Merienda", cursive;
+      font-size: 40px;
+      padding-left: 35px;
+    }
+  }
+  .header-main {
+    display: block;
+    margin: auto auto;
+
+    flex-grow: 2;
+
+    #navbar {
+      font-family: "Merienda", cursive;
+      font-size: 20px;
+      display: flex;
+      .menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .menu img {
+        padding-left: 5px;
+        width: 12px;
+      }
+      li {
+        padding: 10px;
+      }
+
+      .hoverLight:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: transform 50ms ease-in-out;
+        text-shadow: 2px -2px darken($pentiary-color, 30%);
+
+        .bottomBorder:after {
+          margin-top: -5px;
+          display: block;
+          content: "";
+          position: absolute;
+          top: 120%;
+          width: 100%;
+          border-bottom: 3px solid $pentiary-color;
+          transform: scaleX(0);
+          transition: transform 350ms ease-in-out;
+        }
+        .bottomBorder:hover:after {
+          transform: scale(1);
+          transform-origin: 0% 50%;
+        }
+        a {
+          position: relative;
+          color: lighten($tertiary-color, 40%);
+        }
+      }
+    }
+  }
+
+  .header-buttons {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+    #dark-mode-toggle {
+      padding: 15px;
+      #dark-mode-button {
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        border-radius: 15%;
+        background-color: black;
+        border: 1px solid $tertiary-color;
+        &:hover {
+          border-color: #a68fb6;
+
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    #languages {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding-right: 25px;
+
+      height: 100%;
+
+      button {
+        cursor: pointer;
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+        border: 1px solid $tertiary-color;
+        height: 30px;
+        width: 30px;
+        border-radius: 15%;
+
+        &:hover {
+          border-color: #a68fb6;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+main {
+  p {
+    padding: 8px 0px;
+  }
+  position: relative;
+  margin-top: 15vh;
+  background-color: tertiary-color;
+
+  height: max-content;
+
+  .main-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 0px 25px;
+    padding-top: 25px;
+  }
+
+  aside {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: center;
+    color: $primary-color;
+  }
+  .main-content {
+    padding: 0px 15px;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: $primary-color;
+  color: $tertiary-color;
+  position: absolute;
+  height: 10vh;
+  padding: 15px;
+  left: 0;
+  right: 0;
+}
+
+::-webkit-scrollbar {
+  background-color: $primary-color;
+
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background: $tertiary-color;
+  border-radius: 15px;
+}
+a:-webkit-any-link {
+  color: $tertiary-color;
+  cursor: pointer;
+}
+
+.displayed {
+  display: none;
+  height: 100%;
+  padding: 0px;
+
+  overflow: visible;
+  height: "content";
+  background-color: rgba(darken($pentiary-color, 25%), 0.6);
+  border-radius: 15%;
+  padding: 8px;
+  text-shadow: 2px -2px darken($primary-color, 30%);
+
+  li:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 50ms ease-in-out;
+    color: lighten($tertiary-color, 40%);
+    transform: scale(1.05);
+
+    a:hover {
+      text-shadow: 2px -2px darken($primary-color 30%);
+    }
+  }
+}
+
+.hoverMenu:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 50ms ease-in-out;
+  text-shadow: 2px -2px darken($pentiary-color, 30%);
+  color: lighten($tertiary-color, 40%);
+  transform: scale(1.05);
+}
+
+.menuLi:hover .displayed {
+  display: flex;
+  height: 100%;
+  padding: 0px;
+  position: absolute;
+  margin-left: -15px;
+}
