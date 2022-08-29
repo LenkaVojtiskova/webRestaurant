@@ -130,7 +130,6 @@ header .header-buttons #languages button:hover {
 main {
   position: relative;
   margin-top: 15vh;
-  background-color: tertiary-color;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -139,13 +138,69 @@ main p {
   padding: 8px 0px;
 }
 main .main-container {
+  width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  padding: 0px 25px;
-  padding-top: 25px;
+  background-color: #c8a27c;
+}
+main .main-container .main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+main .main-container .main-content .main-left {
+  padding: 15px 25px 0px 25px;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: start;
+  align-items: flex-start;
+}
+main .main-container .main-content .main-left section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(227, 220, 232, 0.5);
+  align-items: center;
+  margin: 25px 0px;
+  padding: 8px;
+  border: 3px solid #151618;
+  border-radius: 15px;
+  box-shadow: -1px -1px 3px #151618;
+}
+main .main-container .main-content .main-left section .food-info {
+  height: 100%;
+  width: 60%;
+}
+main .main-container .main-content .main-left section .food-info h3 {
+  padding-bottom: 15px;
+}
+main .main-container .main-content .main-left section .img-food {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+main .main-container .main-content .main-left section .img-food img {
+  width: 55%;
+  border-radius: 15px;
+}
+main .main-container .main-content .main-left section .food-value {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+main .main-container .main-content .main-left section .food-value .cena {
+  padding-right: 55px;
+}
+main .main-container .main-content .main-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 main aside {
+  border-right: 5px solid #c0c0c5;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -202,6 +257,9 @@ a:-webkit-any-link {
   transition: transform 50ms ease-in-out;
   color: white;
   transform: scale(1.05);
+}
+.displayed li:hover a:hover {
+  text-shadow: 2px -2px black;
 }
 
 .hoverMenu:hover {
