@@ -17,10 +17,33 @@ toggleElement.addEventListener("mouseover", () => {
   });
 });
 
+const FoodMenuList = [
+  { name: "Guláš", weight: 220, price: 150 },
+  { name: "Lasagne", weight: 180, price: 100 },
+  { name: "Kebab", weight: 240, price: 130 },
+  { name: "Palačinky", weight: 80, price: 90 },
+  { name: "Svíčková", weight: 250, price: 130 },
+];
+let options = [];
 function getImage(img) {
   const howManySections = document.querySelectorAll("section");
   const i = howManySections.length;
   img.src = `./imgs/img${i}.jpg`;
+}
+function getText(h3) {
+  const howManyH3 = document.querySelectorAll("h3");
+  const i = howManyH3.length;
+  h3.textContent = FoodMenuList[i - 1].name;
+}
+function getWeight(p) {
+  const howManySections = document.querySelectorAll("section");
+  const i = howManySections.length;
+  p.textContent = `${FoodMenuList[i - 1].weight} g`;
+}
+function getPrice(p) {
+  const howManySections = document.querySelectorAll("section");
+  const i = howManySections.length;
+  p.textContent = `${FoodMenuList[i - 1].price} Kč`;
 }
 
 function allSectionsAtributes() {
@@ -28,6 +51,8 @@ function allSectionsAtributes() {
 
   sections.forEach((section, index) => {
     section.classList.add("food-card");
+    section.setAttribute("id", index + 1);
+
     const firstDiv = section.querySelector("div");
     firstDiv.classList.add("food-info");
     const insideSecondDiv = firstDiv.querySelector("div");
@@ -36,10 +61,19 @@ function allSectionsAtributes() {
     const allP = insideSecondDiv.querySelectorAll("p");
     allP[1].classList.add("cena");
 
-    section.setAttribute("id", index + 1);
     const secondDiv = section.querySelectorAll("div");
-
     secondDiv[2].classList.add("img-food");
+
+    const input = section.querySelector("input");
+    input.classList.add("input-add");
+    input.setAttribute("type", "submit");
+    input.value = "Přidat";
+
+    const select = document.querySelectorAll("select");
+
+    select.forEach((select, i) => {
+      select.setAttribute("id", `select-${i + 1} `);
+    });
   });
 }
 
@@ -64,18 +98,95 @@ function createNewSection(element) {
   foodValue.appendChild(foodValueWeight);
   foodValue.appendChild(foodValuePrice);
 
-  const imgFood = document.createElement("img");
+  const formAddingFood = document.createElement("div");
+  div2.appendChild(formAddingFood);
 
+  const input = document.createElement("input");
+
+  const selectContainer = document.createElement("div");
+  const select = document.createElement("select");
+
+  let options = [];
+  for (i = 0; i < FoodMenuList.length; i++) {
+    const option = document.createElement("option");
+    options.push(option);
+    option.innerText = i + 1;
+  }
+
+  formAddingFood.appendChild(selectContainer);
+  selectContainer.appendChild(select);
+
+  options.forEach((option) => {
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", (e) => {
+    let targetedValue = e.target.value;
+    removeEventListener("change", select);
+    const target = e.target;
+    const parent = target.parentNode.parentNode.parentNode.parentNode;
+    const nameh3 = parent.querySelector("h3");
+    const texth3 = nameh3.textContent;
+
+    const cenaTarget = parent.querySelectorAll("p");
+
+    const cena = cenaTarget[1].textContent;
+
+    input.addEventListener("click", () => {
+      removeEventListener("click", input);
+      const asideP = document.querySelector(".aside-p");
+
+      const newP = document.createElement("p");
+      asideP.parentNode.prepend(newP);
+
+      newP.innerHTML = `Objednal jsem si: <strong> ${texth3} </strong> <br> Porce: ${targetedValue}, <br> Cena: ${cena} *  ${targetedValue}`;
+    });
+  });
+
+  const imgFood = document.createElement("img");
+  formAddingFood.appendChild(input);
   div2.appendChild(imgFood);
 
   allSectionsAtributes();
   getImage(imgFood);
+  getText(foodName);
+  getWeight(foodValueWeight);
+  getPrice(foodValuePrice);
 }
 
 function addSection(element) {
   createNewSection(element);
 }
 
-addSection("section");
-addSection("section");
-addSection("section");
+for (let i = 0; i < FoodMenuList.length; i++) {
+  addSection("section");
+}
+
+const clearBtn = document.querySelector(".clear-btn");
+clearBtn.addEventListener("click", (e) => {
+  const siblings = clearBtn.previousElementSibling;
+
+  if (siblings == null) {
+    return;
+  } else {
+    siblings.remove();
+  }
+});
+
+const clearBtnAll = document.querySelector(".clear-btn-all");
+clearBtnAll.addEventListener("click", (e) => {
+  const allP = clearBtn.parentNode.querySelectorAll("p");
+  const p = document.querySelector(".aside-p");
+
+  if (p === undefined) {
+    const newPp = document.createElement("p");
+    const asideMenu = document.querySelector(".aside-menu");
+    asideMenu.appendChild(newPp);
+
+    return;
+  } else {
+    allP.forEach((parent) => {
+      parent.remove();
+    });
+  }
+});
