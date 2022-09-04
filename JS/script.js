@@ -1,22 +1,4 @@
-const toggleElement = document.querySelector(".menuLi");
-const src = document.querySelector(".menu");
-const imgOff = document.querySelector(".off-dropdown-menu-icon");
-const about = document.querySelector("#about");
-
-const imgOn = document.createElement("img");
-imgOn.src = "./imgs/down-on.png";
-
-toggleElement.addEventListener("mouseover", () => {
-  imgOff.style.display = "none";
-  imgOn.style.display = "flex";
-  src.appendChild(imgOn);
-
-  about.addEventListener("mouseover", (e) => {
-    imgOn.style.display = "none";
-    imgOff.style.display = "flex";
-  });
-});
-
+const MAX_NUMBER_OF_ITEMS = 5;
 const FoodMenuList = [
   { name: "Guláš", weight: 220, price: 150 },
   { name: "Lasagne", weight: 180, price: 100 },
@@ -24,7 +6,31 @@ const FoodMenuList = [
   { name: "Palačinky", weight: 80, price: 90 },
   { name: "Svíčková", weight: 250, price: 130 },
 ];
-let options = [];
+
+function addNavbarListeners() {
+  const toggleElement = document.querySelector(".menuLi");
+  const src = document.querySelector(".menu");
+  const imgOff = document.querySelector(".off-dropdown-menu-icon");
+  const imgOn = document.createElement("img");
+
+  imgOn.src = "./imgs/down-on.png";
+  imgOn.style.display = "none";
+  src.appendChild(imgOn);
+
+  function hideOriginalImg() {
+    imgOn.style.display = "none";
+    imgOff.style.display = "flex";
+    toggleElement.removeEventListener("mouseleave", hideOriginalImg);
+  }
+
+  toggleElement.addEventListener("mouseenter", () => {
+    imgOff.style.display = "none";
+    imgOn.style.display = "flex";
+
+    toggleElement.addEventListener("mouseleave", hideOriginalImg);
+  });
+}
+
 function getImage(img) {
   const howManySections = document.querySelectorAll("section");
   const i = howManySections.length;
@@ -46,12 +52,19 @@ function getPrice(p) {
   p.textContent = `${FoodMenuList[i - 1].price} Kč`;
 }
 
-function allSectionsAtributes() {
+function addSelectAttributes() {
+  const select = document.querySelectorAll("select");
+  select.forEach((select, i) => {
+    select.setAttribute("id", `select-${i + 1} `);
+  });
+}
+
+function addSectionAtributes(section) {
   const sections = document.querySelectorAll("section");
 
   sections.forEach((section, index) => {
     section.classList.add("food-card");
-    section.setAttribute("id", index + 1);
+    section.setAttribute("id", `section${index + 1}`);
 
     const firstDiv = section.querySelector("div");
     firstDiv.classList.add("food-info");
@@ -68,16 +81,10 @@ function allSectionsAtributes() {
     input.classList.add("input-add");
     input.setAttribute("type", "submit");
     input.value = "Přidat";
-
-    const select = document.querySelectorAll("select");
-
-    select.forEach((select, i) => {
-      select.setAttribute("id", `select-${i + 1} `);
-    });
   });
 }
 
-function createNewSection(element) {
+function createNewSection(element, item, index) {
   const srcContainer = document.querySelector(".main-left");
   const newSection = document.createElement(element);
 
@@ -87,9 +94,10 @@ function createNewSection(element) {
   const div2 = document.createElement("div");
   newSection.appendChild(div1);
   newSection.appendChild(div2);
-  const foodName = document.createElement("h3");
 
+  const foodName = document.createElement("h3");
   const foodValue = document.createElement("div");
+
   div1.appendChild(foodName);
   div1.appendChild(foodValue);
 
@@ -106,25 +114,18 @@ function createNewSection(element) {
   const selectContainer = document.createElement("div");
   const select = document.createElement("select");
 
-  let options = [];
-  for (i = 0; i < FoodMenuList.length; i++) {
+  for (i = 0; i < MAX_NUMBER_OF_ITEMS; i++) {
     const option = document.createElement("option");
-    options.push(option);
     option.innerText = i + 1;
+    select.appendChild(option);
   }
 
   formAddingFood.appendChild(selectContainer);
   selectContainer.appendChild(select);
 
-  options.forEach((option) => {
-    select.appendChild(option);
-  });
-
-  select.addEventListener("change", (e) => {
-    let targetedValue = e.target.value;
-    removeEventListener("change", select);
-    const target = e.target;
-    const parent = target.parentNode.parentNode.parentNode.parentNode;
+  const asideP = document.querySelector(".aside-p");
+  input.addEventListener("click", () => {
+    const parent = document.querySelector(`#section${index + 1}`);
     const nameh3 = parent.querySelector("h3");
     const texth3 = nameh3.textContent;
 
@@ -132,61 +133,67 @@ function createNewSection(element) {
 
     const cena = cenaTarget[1].textContent;
 
-    input.addEventListener("click", () => {
-      removeEventListener("click", input);
-      const asideP = document.querySelector(".aside-p");
-
-      const newP = document.createElement("p");
-      asideP.parentNode.prepend(newP);
-
-      newP.innerHTML = `Objednal jsem si: <strong> ${texth3} </strong> <br> Porce: ${targetedValue}, <br> Cena: ${cena} *  ${targetedValue}`;
-    });
+    const newP = document.createElement("p");
+    asideP.parentNode.prepend(newP);
+    newP.innerHTML = `Objednal jsem si: <strong> ${texth3} </strong> <br> Porce: ${select.value}, <br> Cena: ${cena} *  ${select.value}`;
   });
 
   const imgFood = document.createElement("img");
+  imgFood.classList.add("imgOfFood");
   formAddingFood.appendChild(input);
   div2.appendChild(imgFood);
 
-  allSectionsAtributes();
+  addSectionAtributes();
   getImage(imgFood);
   getText(foodName);
   getWeight(foodValueWeight);
   getPrice(foodValuePrice);
 }
 
-function addSection(element) {
-  createNewSection(element);
+function addClearButtonListener() {
+  const clearBtn = document.querySelector(".clear-btn");
+  clearBtn.addEventListener("click", (e) => {
+    const sibling = clearBtn.previousElementSibling;
+
+    if (sibling == null) {
+      return;
+    } else {
+      sibling.remove();
+    }
+  });
 }
 
-for (let i = 0; i < FoodMenuList.length; i++) {
-  addSection("section");
+function addClearAllButtonListener() {
+  const clearBtnAll = document.querySelector(".clear-btn-all");
+  const clearBtn = document.querySelector(".clear-btn");
+
+  clearBtnAll.addEventListener("click", (e) => {
+    const allP = clearBtn.parentNode.querySelectorAll("p");
+    const p = document.querySelector(".aside-p");
+
+    if (p === undefined) {
+      const newPp = document.createElement("p");
+      const asideMenu = document.querySelector(".aside-menu");
+      asideMenu.appendChild(newPp);
+
+      return;
+    } else {
+      allP.forEach((parent) => {
+        parent.remove();
+      });
+    }
+  });
 }
 
-const clearBtn = document.querySelector(".clear-btn");
-clearBtn.addEventListener("click", (e) => {
-  const siblings = clearBtn.previousElementSibling;
+function main() {
+  addNavbarListeners();
 
-  if (siblings == null) {
-    return;
-  } else {
-    siblings.remove();
+  for (let i = 0; i < FoodMenuList.length; i++) {
+    createNewSection("section", FoodMenuList[i], i);
   }
-});
 
-const clearBtnAll = document.querySelector(".clear-btn-all");
-clearBtnAll.addEventListener("click", (e) => {
-  const allP = clearBtn.parentNode.querySelectorAll("p");
-  const p = document.querySelector(".aside-p");
+  addClearButtonListener();
+  addClearAllButtonListener();
+}
 
-  if (p === undefined) {
-    const newPp = document.createElement("p");
-    const asideMenu = document.querySelector(".aside-menu");
-    asideMenu.appendChild(newPp);
-
-    return;
-  } else {
-    allP.forEach((parent) => {
-      parent.remove();
-    });
-  }
-});
+main();
